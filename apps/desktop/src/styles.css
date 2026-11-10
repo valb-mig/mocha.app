@@ -1,0 +1,316 @@
+@import 'tailwindcss';
+
+/* Tema unico e escuro: espresso no fundo, creme no texto, caramelo de acento. */
+@theme {
+  --color-bg: #15110e;
+  --color-panel: #1b1612;
+  --color-raised: #231d18;
+  --color-hover: #2b241e;
+  --color-line: #322922;
+  --color-line-strong: #45382e;
+  --color-fg: #efe5d6;
+  --color-soft: #d6c8b5;
+  --color-muted: #a3927f;
+  --color-faint: #6f6155;
+  --color-accent: #c98f5a;
+  --color-accent-strong: #dba472;
+  --color-accent-fg: #1f150c;
+  --color-accent-wash: #c98f5a1f;
+  --color-danger: #d4705a;
+
+  --font-sans: 'Geist Variable', system-ui, sans-serif;
+  --font-serif: 'Fraunces Variable', Georgia, serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-breathe: breathe 1.6s ease-in-out infinite;
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 35%, transparent);
+  }
+  input,
+  textarea,
+  [contenteditable],
+  .cm-content {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+  button {
+    cursor: default;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* Fundo quadriculado para assets transparentes. */
+.checker {
+  background-color: #1e1915;
+  background-image:
+    linear-gradient(45deg, #261f1a 25%, transparent 25%),
+    linear-gradient(-45deg, #261f1a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #261f1a 75%),
+    linear-gradient(-45deg, transparent 75%, #261f1a 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* Divisor dos paineis: linha fina que engrossa no hover. */
+[data-separator] {
+  position: relative;
+  width: 1px;
+  background: var(--color-line);
+  transition: background 150ms;
+}
+[data-separator]::after {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+}
+[data-separator='hover'],
+[data-separator='active'],
+[data-separator='focus'] {
+  background: var(--color-accent);
+  outline: none;
+}
+
+/* ------------------------------------------------------------ editor */
+
+.mocha-editor .cm-editor {
+  height: 100%;
+  background: transparent;
+  color: var(--color-soft);
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+.mocha-editor .cm-editor.cm-focused {
+  outline: none;
+}
+.mocha-editor .cm-scroller {
+  font-family: inherit;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+.mocha-editor .cm-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px 40px 40vh;
+  caret-color: var(--color-accent);
+}
+.mocha-editor .cm-line {
+  padding: 0;
+}
+.mocha-editor .cm-cursor {
+  border-left: 2px solid var(--color-accent);
+}
+.mocha-editor .cm-selectionBackground,
+.mocha-editor .cm-focused .cm-selectionBackground,
+.mocha-editor .cm-content ::selection {
+  background: color-mix(in oklab, var(--color-accent) 28%, transparent) !important;
+}
+.mocha-editor .cm-placeholder {
+  color: var(--color-faint);
+  font-style: normal;
+}
+.mocha-editor .cm-h1,
+.mocha-editor .cm-h2,
+.mocha-editor .cm-h3,
+.mocha-editor .cm-h4 {
+  font-family: var(--font-serif);
+  color: var(--color-fg);
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+.mocha-editor .cm-h1 {
+  font-size: 1.9em;
+  line-height: 1.35;
+  padding-top: 0.5em;
+}
+.mocha-editor .cm-h2 {
+  font-size: 1.45em;
+  line-height: 1.4;
+  padding-top: 0.45em;
+}
+.mocha-editor .cm-h3 {
+  font-size: 1.2em;
+  padding-top: 0.3em;
+}
+.mocha-editor .cm-h4 {
+  font-size: 1.05em;
+}
+.mocha-editor .cm-mark {
+  color: var(--color-faint);
+}
+.mocha-editor .cm-strong {
+  font-weight: 650;
+  color: var(--color-fg);
+}
+.mocha-editor .cm-em {
+  font-style: italic;
+}
+.mocha-editor .cm-strike {
+  text-decoration: line-through;
+  color: var(--color-muted);
+}
+.mocha-editor .cm-inline-code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-raised);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  padding: 1px 4px;
+}
+.mocha-editor .cm-link-text {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  text-underline-offset: 3px;
+}
+.mocha-editor .cm-url {
+  color: var(--color-faint);
+}
+.mocha-editor .cm-quote {
+  border-left: 2px solid var(--color-accent);
+  padding-left: 14px !important;
+  color: var(--color-muted);
+}
+.mocha-editor .cm-codeblock {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--color-panel);
+  padding: 0 14px !important;
+  border-left: 1px solid var(--color-line);
+  border-right: 1px solid var(--color-line);
+}
+.mocha-editor .cm-codeblock-first {
+  border-top: 1px solid var(--color-line);
+  border-radius: 6px 6px 0 0;
+  padding-top: 4px !important;
+}
+.mocha-editor .cm-codeblock-last {
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0 0 6px 6px;
+  padding-bottom: 4px !important;
+}
+.mocha-editor .cm-codeblock-first.cm-codeblock-last {
+  border-radius: 6px;
+}
+.mocha-editor .cm-bullet {
+  display: inline-block;
+  width: 1.1em;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+.mocha-editor .cm-task {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  margin: 0 6px -2px 0;
+  border: 1.5px solid var(--color-line-strong);
+  border-radius: 4px;
+  background: var(--color-panel);
+  vertical-align: baseline;
+  transition: background 120ms, border-color 120ms;
+}
+.mocha-editor .cm-task:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%231f150c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.mocha-editor .cm-task-done {
+  color: var(--color-faint);
+  text-decoration: line-through;
+}
+.mocha-editor .cm-hr {
+  display: block;
+  height: 1px;
+  margin: 4px 0;
+  background: var(--color-line-strong);
+}
+.mocha-editor .cm-image {
+  display: block;
+  margin: 8px 0;
+}
+.mocha-editor .cm-image img {
+  display: block;
+  max-width: 100%;
+  max-height: 460px;
+  border-radius: 8px;
+  border: 1px solid var(--color-line);
+  background: var(--color-panel);
+}
+.mocha-editor .cm-image-missing {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-faint);
+  padding: 6px 10px;
+  border: 1px dashed var(--color-line-strong);
+  border-radius: 6px;
+}
+.mocha-editor .cm-table {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

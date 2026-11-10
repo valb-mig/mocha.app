@@ -1,0 +1,13 @@
+{
+  "name": "mocha",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.3.0",
+  "scripts": {
+    "dev": "pnpm --filter @mocha/desktop tauri dev",
+    "dev:web": "pnpm --filter @mocha/desktop dev:web",
+    "build": "pnpm --filter @mocha/desktop tauri build",
+    "mcp:build": "pnpm --filter @mocha/mcp build",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

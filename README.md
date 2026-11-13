@@ -1,11 +1,35 @@
+<div align="center">
+
+<img src="apps/desktop/app-icon.svg" width="96" alt="Logo do mocha: uma xícara de café com leite num quadrado arredondado escuro">
+
 # mocha
 
+</div>
+
 Organizador de design de aplicações web, por ideia. Roda na máquina, sem login, e tudo é arquivo de verdade numa pasta (o *vault*).
+
+![Uma ideia aberta no mocha: tópicos do briefing à esquerda, o texto com o esboço no meio e as versões do blend à direita](docs/screenshots/ideia.png)
 
 - **Ideia**: um projeto. Tem um briefing e os blends.
 - **Briefing**: tópicos em markdown, estilo Obsidian, com imagens de referência coladas direto no editor.
 - **Blend**: o design feito a partir do briefing, em HTML puro, versionado (`v1`, `v2`…). Cada versão tem telas, paleta, fontes, tokens, assets e notas.
 - **MCP**: agentes leem o briefing, criam e editam blends e aplicam o design em outros projetos.
+
+## Telas
+
+**Ideias.** Cada ideia vira um cartão com a primeira tela do blend mais novo, quantos tópicos tem o briefing e a versão atual.
+
+![Lista de ideias, cada uma com a prévia da primeira tela do blend](docs/screenshots/ideias.png)
+
+**Blend ao lado do briefing.** As telas da versão rodam ali mesmo e mudam na hora quando um agente ou um editor mexe no HTML.
+
+![Briefing da ideia à esquerda e, à direita, a tela Canteiros do blend v2 rodando](docs/screenshots/blend.png)
+
+**Paleta e fontes**, lidas do `tokens.json` da versão.
+
+| Paleta | Fontes |
+| --- | --- |
+| <img src="docs/screenshots/paleta.png" alt="Aba Paleta: as cores do blend agrupadas em base, texto, acento e natureza, com o hex de cada uma"> | <img src="docs/screenshots/fontes.png" alt="Aba Fontes: título, corpo e mono com família, fallback, pesos e uma frase de amostra"> |
 
 ## Rodar
 
